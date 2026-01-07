@@ -11,6 +11,19 @@ const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+/**
+ * Helper to bridge the gap between AI SDK V3 models and V2 expectations.
+ * This fixes the "Type 'LanguageModelV3' is not assignable to type 'LanguageModelV2'" error.
+ */
+function wrapV3toV2(model: any): any {
+  return new Proxy(model, {
+    get(target, prop) {
+      if (prop === 'specificationVersion') return 'v2';
+      return target[prop as keyof typeof target];
+    },
+  });
+}
+
 export const myProvider = isTestEnvironment
   ? (() => {
       const {
@@ -28,16 +41,14 @@ export const myProvider = isTestEnvironment
         },
       });
     })()
-// ... inside your customProvider configuration
   : customProvider({
       languageModels: {
-        // Add "as any" to bypass the version mismatch check
-        "chat-model": openai("gpt-4o-mini") as any,
+        "chat-model": wrapV3toV2(openai("gpt-4o-mini")),
         "chat-model-reasoning": wrapLanguageModel({
-          model: openai("o1-mini") as any,
+          model: wrapV3toV2(openai("o1-mini")),
           middleware: extractReasoningMiddleware({ tagName: "think" }),
         }) as any,
-        "title-model": openai("gpt-4o-mini") as any,
-        "artifact-model": openai("gpt-4o") as any,
+        "title-model": wrapV3toV2(openai("gpt-4o-mini")),
+        "artifact-model": wrapV3toV2(openai("gpt-4o")),
       },
     });
