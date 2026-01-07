@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { useLocalStorage, useWindowSize } from "usehooks-ts";
 import { saveChatModelAsCookie } from "@/app/(chat)/actions";
 import { SelectItem } from "@/components/ui/select";
-import { chatModels } from "@/lib/ai/models";
+import { Models } from "@/lib/ai/models";
 import type { Attachment, ChatMessage } from "@/lib/types";
 import type { AppUsage } from "@/lib/usage";
 import { cn } from "@/lib/utils";
@@ -463,14 +463,16 @@ function PureModelSelectorCompact({
     setOptimisticModelId(selectedModelId);
   }, [selectedModelId]);
 
-  const selectedModel = chatModels.find(
+  // Changed chatModels to models
+  const selectedModel = models.find(
     (model) => model.id === optimisticModelId
   );
 
   return (
     <PromptInputModelSelect
       onValueChange={(modelName) => {
-        const model = chatModels.find((m) => m.name === modelName);
+        // Changed chatModels to models
+        const model = models.find((m) => m.name === modelName);
         if (model) {
           setOptimisticModelId(model.id);
           onModelChange?.(model.id);
@@ -492,7 +494,8 @@ function PureModelSelectorCompact({
       </Trigger>
       <PromptInputModelSelectContent className="min-w-[260px] p-0">
         <div className="flex flex-col gap-px">
-          {chatModels.map((model) => (
+          {/* Changed chatModels to models */}
+          {models.map((model) => (
             <SelectItem key={model.id} value={model.name}>
               <div className="truncate font-medium text-xs">{model.name}</div>
               <div className="mt-px truncate text-[10px] text-muted-foreground leading-tight">
@@ -505,7 +508,6 @@ function PureModelSelectorCompact({
     </PromptInputModelSelect>
   );
 }
-
 const ModelSelectorCompact = memo(PureModelSelectorCompact);
 
 function PureStopButton({
