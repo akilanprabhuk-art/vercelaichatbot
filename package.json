@@ -18,9 +18,9 @@
     "test": "export PLAYWRIGHT=True && pnpm exec playwright test"
   },
   "dependencies": {
-    "@ai-sdk/openai": "latest",    
+    "@ai-sdk/openai": "1.0.0",    
     "@ai-sdk/provider": "2.0.0",
-    "@ai-sdk/react": "Latest",
+    "@ai-sdk/react": "2.0.26",
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/lang-python": "^6.1.6",
     "@codemirror/state": "^6.5.0",
@@ -37,7 +37,7 @@
     "@vercel/blob": "^0.24.1",
     "@vercel/functions": "^2.0.0",
     "@vercel/otel": "^1.12.0",
-    "ai": "Latest",
+    "ai": "5.0.26",
     "bcrypt-ts": "^5.0.2",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
