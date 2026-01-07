@@ -166,12 +166,7 @@ await saveMessages({
           id: message.id,
           role: "user",
           parts: message.parts,
-          // Extract attachments from the parts if they exist
-          attachments: message.parts.filter(p => p.type === 'file').map(p => ({
-            url: p.url,
-            name: p.name,
-            contentType: p.mediaType,
-          })), 
+          attachments: [], // <--- THIS IS THE PROBLEM
           createdAt: new Date(),
         },
       ],
