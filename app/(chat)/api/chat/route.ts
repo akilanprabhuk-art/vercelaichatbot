@@ -45,7 +45,7 @@ import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
 
-export const maxDuration = 'edge';
+export const maxDuration = 60;
 
 let globalStreamContext: ResumableStreamContext | null = null;
 
