@@ -1,21 +1,30 @@
-export const DEFAULT_CHAT_MODEL: string = "chat-model";
-
-export type ChatModel = {
+export interface ChatModel {
   id: string;
   name: string;
   description: string;
-};
+}
 
-export const chatModels: ChatModel[] = [
+export const models: ChatModel[] = [
   {
-    id: "chat-model",
-    name: "Grok Vision",
-    description: "Advanced multimodal model with vision and text capabilities",
+    id: 'chat-model',
+    name: 'GPT-4o Mini',
+    description: 'Fast OpenAI model (No credit card required)',
   },
   {
-    id: "chat-model-reasoning",
-    name: "Grok Reasoning",
-    description:
-      "Uses advanced chain-of-thought reasoning for complex problems",
+    id: 'chat-model-reasoning',
+    name: 'OpenAI o1-mini',
+    description: 'Reasoning model for complex logic',
+  },
+  {
+    id: 'title-model',
+    name: 'GPT-4o Mini',
+    description: 'Used for generating chat titles',
+  },
+  {
+    id: 'artifact-model',
+    name: 'GPT-4o',
+    description: 'Used for creating detailed artifacts',
   },
 ];
+
+export const DEFAULT_CHAT_MODEL: string = 'chat-model';
