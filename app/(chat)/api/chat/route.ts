@@ -159,14 +159,19 @@ export async function POST(request: Request) {
       country,
     };
 
-    await saveMessages({
+await saveMessages({
       messages: [
         {
           chatId: id,
           id: message.id,
           role: "user",
           parts: message.parts,
-          attachments: [],
+          // Extract attachments from the parts if they exist
+          attachments: message.parts.filter(p => p.type === 'file').map(p => ({
+            url: p.url,
+            name: p.name,
+            contentType: p.mediaType,
+          })), 
           createdAt: new Date(),
         },
       ],
